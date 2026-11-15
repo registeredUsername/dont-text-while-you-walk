@@ -151,6 +151,18 @@ export function formsWall(
   only?: Placed,
 ): boolean {
   const window = SIMULTANEOUS_DZ / player.speed;
+  // Se baisser et sauter en même temps est impossible.
+  const ducks = obstacles.filter((o) => o.def.response === 'duck');
+  const fullJumps = obstacles.filter((o) => o.def.response === 'jump' && o.def.width >= lanes);
+  const checkDuckJump = only ? ducks.includes(only) || fullJumps.includes(only) : true;
+  if (
+    checkDuckJump &&
+    ducks.some((d) =>
+      fullJumps.some((j) => Math.abs(arrivalTime(d, player) - arrivalTime(j, player)) < window),
+    )
+  ) {
+    return true;
+  }
   const dodgers = obstacles.filter((o) => o.def.response === 'dodge');
   const anchors = only ? [only] : dodgers;
   for (const anchor of anchors) {

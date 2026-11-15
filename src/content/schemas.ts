@@ -24,8 +24,11 @@ export const obstacleSchema = z
     label: z.string().min(1),
     /** hazard = à éviter, pickup = à ramasser. */
     kind: z.enum(['hazard', 'pickup']),
-    /** dodge = changer de couloir, duck = se baisser, collect = passer dessus. */
-    response: z.enum(['dodge', 'duck', 'collect']),
+    /**
+     * dodge = changer de couloir, duck = se baisser, jump = sauter (ou contourner s'il
+     * reste un couloir libre), collect = passer dessus.
+     */
+    response: z.enum(['dodge', 'duck', 'jump', 'collect']),
     /** Nombre de couloirs occupés (1 à 3). */
     width: z.number().int().min(1).max(3),
     /** Vitesse propre vers le joueur (u/s). 0 = immobile. */

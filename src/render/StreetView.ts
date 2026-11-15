@@ -6,7 +6,9 @@ import { ASSET_MANIFEST, type AssetEntry } from './assetManifest';
 import {
   clamp,
   depthFactor,
+  EYE,
   horizonY,
+  NEAR_DEPTH,
   PERSPECTIVE,
   PHONE,
   projectX,
@@ -53,7 +55,9 @@ export class StreetView {
   private readonly warnings: Phaser.GameObjects.Text[] = [];
   private readonly skyline: Array<{ x: number; w: number; h: number }> = [];
   private readonly colors;
+  private readonly peripheralDim: Phaser.GameObjects.Rectangle;
   private cameraLane = 0;
+  private eye: number = EYE.standing;
 
   constructor(
     private readonly scene: Phaser.Scene,
@@ -67,6 +71,11 @@ export class StreetView {
       laneLine: hex(city.colors.laneLine),
     };
     this.ground = scene.add.graphics().setDepth(0);
+    // Téléphone levé, la rue n'est vue que du coin de l'œil : on l'assombrit.
+    this.peripheralDim = scene.add
+      .rectangle(0, 0, VIEW.width, VIEW.height, 0x0b0c0e, 0)
+      .setOrigin(0)
+      .setDepth(1400);
     // Silhouette d'immeubles à l'horizon : générée une fois, déterministe.
     let x = -200;
     let i = 0;
@@ -98,10 +107,20 @@ export class StreetView {
     // Caméra : suit le couloir du joueur avec un lissage (le changement de couloir reste instantané en jeu).
     const targetLane = state.lane - (GAME_CONFIG.lanes - 1) / 2;
     this.cameraLane += (targetLane - this.cameraLane) * clamp(deltaMs / 70, 0, 1);
+    // Hauteur des yeux : saut en cloche, accroupissement rapide mais lissé.
+    if (state.jumpRemaining > 0) {
+      const t = 1 - state.jumpRemaining / GAME_CONFIG.player.jumpSeconds;
+      this.eye = EYE.standing + EYE.jumpApex * Math.sin(Math.PI * t);
+    } else {
+      const target = state.duckRemaining > 0 ? EYE.ducking : EYE.standing;
+      this.eye += (target - this.eye) * clamp(deltaMs / 45, 0, 1);
+    }
     const proj: Projection = {
-      horizon: horizonY(state.phone.progress, state.duckRemaining > 0),
+      horizon: horizonY(state.phone.progress),
       cameraLane: this.cameraLane,
+      eye: this.eye,
     };
+    this.peripheralDim.setFillStyle(0x0b0c0e, 0.6 * state.phone.progress);
     this.drawGround(state, proj);
     this.drawObstacles(state, proj, deltaMs);
     this.drawWarnings(state, proj);
@@ -134,8 +153,8 @@ export class StreetView {
       fillPolygon(g, [
         { x: projectX(proj, o1, far), y: projectY(proj, far) },
         { x: projectX(proj, o2, far), y: projectY(proj, far) },
-        { x: projectX(proj, o2, 0), y: VIEW.height },
-        { x: projectX(proj, o1, 0), y: VIEW.height },
+        { x: projectX(proj, o2, NEAR_DEPTH), y: projectY(proj, NEAR_DEPTH) },
+        { x: projectX(proj, o1, NEAR_DEPTH), y: projectY(proj, NEAR_DEPTH) },
       ]);
     };
     quad(half, half + 6, c.road);
@@ -143,16 +162,15 @@ export class StreetView {
 
     // Façade : un plan vertical au bord gauche du trottoir.
     const wallOffset = -half - 0.1;
-    const wallTop = (d: number): number =>
-      projectY(proj, d) - PERSPECTIVE.wallHeight * PERSPECTIVE.laneWidth * depthFactor(d);
+    const wallTop = (d: number): number => projectY(proj, d, PERSPECTIVE.wallHeight);
     g.fillStyle(c.skyline);
     fillPolygon(g, [
       { x: projectX(proj, wallOffset, far), y: projectY(proj, far) },
       { x: projectX(proj, wallOffset, far), y: wallTop(far) },
-      { x: projectX(proj, wallOffset, -2), y: wallTop(-2) },
-      { x: projectX(proj, wallOffset, -2), y: projectY(proj, -2) },
-      { x: -400, y: projectY(proj, -2) },
-      { x: -400, y: wallTop(far) },
+      { x: projectX(proj, wallOffset, NEAR_DEPTH), y: wallTop(NEAR_DEPTH) },
+      { x: projectX(proj, wallOffset, NEAR_DEPTH), y: projectY(proj, NEAR_DEPTH) },
+      { x: -4000, y: projectY(proj, NEAR_DEPTH) },
+      { x: -4000, y: wallTop(far) },
     ]);
 
     // Lignes de couloirs et bordure.
@@ -161,16 +179,16 @@ export class StreetView {
       g.lineBetween(
         projectX(proj, offset, far),
         projectY(proj, far),
-        projectX(proj, offset, 0),
-        VIEW.height,
+        projectX(proj, offset, NEAR_DEPTH),
+        projectY(proj, NEAR_DEPTH),
       );
     }
     g.lineStyle(6, 0xffffff, 0.35);
     g.lineBetween(
       projectX(proj, half, far),
       projectY(proj, far),
-      projectX(proj, half, 0),
-      VIEW.height,
+      projectX(proj, half, NEAR_DEPTH),
+      projectY(proj, NEAR_DEPTH),
     );
 
     // Joints du trottoir et séparations de façade qui défilent : la sensation de vitesse.
@@ -199,9 +217,8 @@ export class StreetView {
       const entry = ASSET_MANIFEST[obstacle.def.assetKey] ?? FALLBACK_ASSET;
       const p = depthFactor(d);
       const laneCenter = obstacle.lane + obstacle.def.width / 2 - GAME_CONFIG.lanes / 2;
-      const elevation = (entry.elevation ?? 0) * PERSPECTIVE.laneWidth * p;
       sprite.container
-        .setPosition(projectX(proj, laneCenter, d), projectY(proj, d) - elevation)
+        .setPosition(projectX(proj, laneCenter, d), projectY(proj, d, entry.elevation ?? 0))
         .setScale(p)
         .setDepth(1000 - d)
         // Apparition progressive à l'horizon, disparition rapide une fois dépassé.

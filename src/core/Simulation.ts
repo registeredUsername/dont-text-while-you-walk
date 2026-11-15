@@ -33,6 +33,7 @@ export class Simulation {
   private readonly director: Director;
   private readonly events: GameEvent[] = [];
   private nextUid = 1;
+  private readonly startDifficulty: number;
 
   constructor(
     private readonly content: GameContent,
@@ -53,7 +54,8 @@ export class Simulation {
       config.firstObstacleAt,
       config.firstNotificationAfter,
     );
-    const difficulty = difficultyAt(city, 0);
+    this.startDifficulty = Math.min(1, Math.max(0, options.startDifficulty ?? 0));
+    const difficulty = difficultyAt(city, 0, this.startDifficulty);
     this.state = {
       seed,
       cityId,
@@ -65,6 +67,7 @@ export class Simulation {
       previousLane: config.startLane,
       laneChangedAt: -Infinity,
       duckRemaining: 0,
+      jumpRemaining: 0,
       phone: { position: 'down', progress: 0 },
       notifications: [],
       obstacles: [],
@@ -105,6 +108,7 @@ export class Simulation {
         else if (gesture === 'swipeLeft') this.changeLane(-1);
         else if (gesture === 'swipeRight') this.changeLane(1);
         else if (gesture === 'swipeDown') this.duck();
+        else if (gesture === 'tap') this.jump();
         break;
       case 'up':
         if (gesture === 'swipeDown') this.setPhone('lowering');
@@ -130,7 +134,7 @@ export class Simulation {
     const s = this.state;
     if (s.over) return this.flushEvents();
 
-    const difficulty = difficultyAt(this.city, s.time);
+    const difficulty = difficultyAt(this.city, s.time, this.startDifficulty);
     s.time += dt;
     s.difficulty = difficulty.t;
     s.speed = difficulty.speed;
@@ -139,6 +143,7 @@ export class Simulation {
 
     this.updatePhone(dt);
     s.duckRemaining = Math.max(0, s.duckRemaining - dt);
+    s.jumpRemaining = Math.max(0, s.jumpRemaining - dt);
     s.invulnerableRemaining = Math.max(0, s.invulnerableRemaining - dt);
 
     // Obstacles : apparition, déplacement, passage à hauteur du joueur.
@@ -235,8 +240,18 @@ export class Simulation {
   }
 
   private duck(): void {
+    // Pas de changement de posture en plein saut.
+    if (this.state.jumpRemaining > 0) return;
     this.state.duckRemaining = this.config.player.duckSeconds;
     this.events.push({ type: 'ducked' });
+  }
+
+  private jump(): void {
+    const s = this.state;
+    if (s.jumpRemaining > 0) return;
+    s.duckRemaining = 0; // on se relève pour sauter
+    s.jumpRemaining = this.config.player.jumpSeconds;
+    this.events.push({ type: 'jumped' });
   }
 
   private answer(gesture: Gesture): void {
@@ -283,8 +298,13 @@ export class Simulation {
       return;
     }
 
+    const inLane = this.occupies(obstacle, s.lane);
     const avoided =
-      def.response === 'duck' ? s.duckRemaining > 0 : !this.occupies(obstacle, s.lane);
+      def.response === 'duck'
+        ? s.duckRemaining > 0
+        : def.response === 'jump'
+          ? s.jumpRemaining > 0 || !inLane
+          : !inLane;
     if (!avoided) {
       this.hit(obstacle);
       return;

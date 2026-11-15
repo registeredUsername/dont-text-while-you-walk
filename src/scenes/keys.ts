@@ -16,10 +16,16 @@ export const REGISTRY = {
 export interface GameSceneData {
   cityId: string;
   seed?: number;
+  /** Difficulté de départ (0 à 1), voir le réglage « Départ » du menu. */
+  startDifficulty?: number;
+  /** Invincible (réglage de test). */
+  god?: boolean;
 }
 
 export interface GameOverData {
   cityId: string;
+  startDifficulty: number;
+  god: boolean;
   seed: number;
   score: number;
   distance: number;

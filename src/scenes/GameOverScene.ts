@@ -16,7 +16,9 @@ export class GameOverScene extends Phaser.Scene {
 
     const key = bestScoreKey(data.cityId);
     const previousBest = loadNumber(key);
-    const isBest = data.score > previousBest;
+    // Pas de record en mode test (invincible ou départ avancé).
+    const testMode = data.god || data.startDifficulty > 0;
+    const isBest = !testMode && data.score > previousBest;
     if (isBest) saveNumber(key, data.score);
 
     const grannies = data.stats.collisionsByObstacle['granny'] ?? 0;
@@ -51,7 +53,11 @@ export class GameOverScene extends Phaser.Scene {
       .text(
         cx,
         410,
-        isBest ? STRINGS.newBest : `${STRINGS.best} : ${Math.max(previousBest, data.score)}`,
+        testMode
+          ? STRINGS.testMode
+          : isBest
+            ? STRINGS.newBest
+            : `${STRINGS.best} : ${Math.max(previousBest, data.score)}`,
         {
           fontFamily: UI_FONT,
           fontSize: '28px',
@@ -82,7 +88,11 @@ export class GameOverScene extends Phaser.Scene {
     });
 
     makeButton(this, cx, 930, STRINGS.retry, () =>
-      this.scene.start(SCENES.game, { cityId: data.cityId }),
+      this.scene.start(SCENES.game, {
+        cityId: data.cityId,
+        startDifficulty: data.startDifficulty,
+        god: data.god,
+      }),
     );
     makeButton(this, cx, 1050, STRINGS.menu, () => this.scene.start(SCENES.menu), {
       color: 0x3a3a3c,

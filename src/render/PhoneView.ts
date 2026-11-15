@@ -40,6 +40,8 @@ export class PhoneView {
   private readonly counter: Phaser.GameObjects.Text;
   private readonly clock: Phaser.GameObjects.Text;
   private readonly cards = new Map<number, CardView>();
+  /** Décalage vertical lissé quand on se baisse ou qu'on saute. */
+  private bodyOffset = 0;
 
   constructor(private readonly scene: Phaser.Scene) {
     const body = scene.add.graphics();
@@ -95,10 +97,19 @@ export class PhoneView {
       .setDepth(2000);
   }
 
-  update(state: GameState): void {
+  update(state: GameState, deltaMs: number): void {
     // Petit balancement de marche quand le téléphone est baissé.
     const sway = Math.sin(state.distance * 0.9) * 8 * (1 - state.phone.progress);
-    this.container.y = lerp(PHONE.downTop, PHONE.upTop, easeOut(state.phone.progress)) + sway;
+    // Accroupi : le téléphone descend. En saut : il traîne un peu derrière le mouvement.
+    let target = 0;
+    if (state.duckRemaining > 0) target = 110;
+    if (state.jumpRemaining > 0) {
+      const t = 1 - state.jumpRemaining / GAME_CONFIG.player.jumpSeconds;
+      target = Math.sin(Math.PI * t) * 90;
+    }
+    this.bodyOffset += (target - this.bodyOffset) * Math.min(1, deltaMs / 40);
+    this.container.y =
+      lerp(PHONE.downTop, PHONE.upTop, easeOut(state.phone.progress)) + sway + this.bodyOffset;
     this.container.x = (VIEW.width - PHONE.width) / 2 + Math.cos(state.distance * 0.45) * 6;
 
     const minutes = 41 + Math.floor(state.time / 60);

@@ -64,3 +64,17 @@ describe('validation', () => {
     }
   });
 });
+
+describe('validation saut / accroupi', () => {
+  it('signale un pattern « vitre + laisse » simultanés', () => {
+    const cities = structuredClone(RAW_CONTENT.cities) as Array<{ patterns: unknown[] }>;
+    cities[0]!.patterns.push({
+      id: 'impossible',
+      spawns: [
+        { obstacle: 'glass-pane', lane: 0 },
+        { obstacle: 'dog-leash', lane: 0, dz: 1 },
+      ],
+    });
+    expect(() => parseContent({ ...RAW_CONTENT, cities })).toThrow(/« duck » et un « jump »/);
+  });
+});

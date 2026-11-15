@@ -16,7 +16,9 @@ export type SfxName =
   | 'nearMiss'
   | 'pickup'
   | 'phone'
-  | 'lane';
+  | 'lane'
+  | 'jump'
+  | 'duck';
 
 type Note = [frequency: number, duration: number, type?: OscillatorType];
 
@@ -61,6 +63,14 @@ const SOUNDS: Record<SfxName, Note[]> = {
   ],
   phone: [[600, 0.03, 'triangle']],
   lane: [[400, 0.02, 'triangle']],
+  jump: [
+    [300, 0.05],
+    [520, 0.09],
+  ],
+  duck: [
+    [360, 0.05, 'triangle'],
+    [240, 0.08, 'triangle'],
+  ],
 };
 
 let ctx: AudioContext | null = null;

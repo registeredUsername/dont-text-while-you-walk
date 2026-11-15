@@ -15,11 +15,15 @@ et remplacer ce fichier, pour garder l'historique dans Git.
 Ces règles sont dans `src/core/` et couvertes par `tests/simulation.test.ts`.
 
 - **Deux états du téléphone**, baissé et levé, avec 150 ms de transition. Téléphone levé, la
-  rue proche est cachée : seules la bande du haut et des alertes (« Attention la vitre ! ») restent visibles.
-- **Le même geste change de sens** : téléphone baissé, ← → change de couloir et ↓ fait se
-  baisser. Téléphone levé, ← → / tap / appui long répondent à la notification du dessus.
+  rue proche est cachée : seule une bande lointaine, assombrie, et des alertes (« Attention la vitre ! »)
+  restent visibles.
+- **Le même geste change de sens** : téléphone baissé, ← → change de couloir, ↓ fait se
+  baisser et tap fait sauter. Téléphone levé, ← → / tap / appui long répondent à la
+  notification du dessus.
 - **3 couloirs**. Obstacles « dodge » (changer de couloir), « duck » (se baisser, toute la
-  largeur), bonus « collect » (café = +1 vie, Wi-Fi = -5 stress).
+  largeur, à hauteur de tête), « jump » (sauter, au ras du sol, ou contourner s'il reste un
+  couloir libre), bonus « collect » (café = +1 vie, Wi-Fi = -5 stress). Se baisser fait
+  descendre la caméra, sauter la fait monter : la vitre passe au-dessus, la laisse en dessous.
 - **3 vies**, perdues par collision ou par jauge de stress pleine (10). 1,5 s d'invulnérabilité
   après un choc, qui fait aussi baisser le téléphone.
 - **Notifications** : durée de vie, bonne réponse, stress si ignorée ou mauvaise réponse.
