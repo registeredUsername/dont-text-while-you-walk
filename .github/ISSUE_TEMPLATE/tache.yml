@@ -1,0 +1,14 @@
+name: Tâche
+description: Travail technique, doc, outillage
+labels: [tâche]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: À faire
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: C'est fini quand

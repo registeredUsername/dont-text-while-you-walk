@@ -1,0 +1,32 @@
+name: Bug
+description: Quelque chose ne marche pas comme prévu
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: Ce qui se passe
+      description: Et ce qui devrait se passer à la place.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Pour reproduire
+      description: 'Astuce : lance avec ?debug=1 et note la graine (seed) affichée, puis rejoue avec ?seed=...'
+      placeholder: |
+        1. Ouvrir ...?seed=1234
+        2. Lever le téléphone vers 20 s
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Appareil et navigateur
+      placeholder: iPhone 13 / Safari, Pixel 7 / Chrome, PC / Chrome mode mobile...
+  - type: input
+    id: version
+    attributes:
+      label: Version ou commit
+      description: Affiché en bas du menu.

@@ -1,0 +1,113 @@
+[
+  {
+    "id": "pedestrian",
+    "label": "Piéton",
+    "kind": "hazard",
+    "response": "dodge",
+    "width": 1,
+    "speed": 4,
+    "assetKey": "obstacle.pedestrian",
+    "warning": "Piéton en face !"
+  },
+  {
+    "id": "granny",
+    "label": "Grand-mère",
+    "kind": "hazard",
+    "response": "dodge",
+    "width": 1,
+    "speed": 1,
+    "assetKey": "obstacle.granny",
+    "warning": "Cling ! (déambulateur)"
+  },
+  {
+    "id": "lamppost",
+    "label": "Lampadaire",
+    "kind": "hazard",
+    "response": "dodge",
+    "width": 1,
+    "assetKey": "obstacle.lamppost"
+  },
+  {
+    "id": "trash-bin",
+    "label": "Poubelle",
+    "kind": "hazard",
+    "response": "dodge",
+    "width": 1,
+    "assetKey": "obstacle.trash-bin"
+  },
+  {
+    "id": "double-stroller",
+    "label": "Poussette double",
+    "kind": "hazard",
+    "response": "dodge",
+    "width": 2,
+    "speed": 2,
+    "assetKey": "obstacle.double-stroller",
+    "warning": "Poussette double !"
+  },
+  {
+    "id": "glass-pane",
+    "label": "Vitre portée",
+    "kind": "hazard",
+    "response": "duck",
+    "width": 3,
+    "assetKey": "obstacle.glass-pane",
+    "warning": "Attention la vitre !"
+  },
+  {
+    "id": "scaffolding",
+    "label": "Échafaudage",
+    "kind": "hazard",
+    "response": "duck",
+    "width": 3,
+    "assetKey": "obstacle.scaffolding",
+    "warning": "Chantier !"
+  },
+  {
+    "id": "tourist-selfie",
+    "label": "Touriste selfie",
+    "kind": "hazard",
+    "response": "dodge",
+    "width": 1,
+    "assetKey": "obstacle.tourist-selfie",
+    "warning": "« Cheese ! »"
+  },
+  {
+    "id": "steam-vent",
+    "label": "Bouche de vapeur",
+    "kind": "hazard",
+    "response": "dodge",
+    "width": 1,
+    "assetKey": "obstacle.steam-vent",
+    "warning": "Pschhh..."
+  },
+  {
+    "id": "food-cart",
+    "label": "Food cart",
+    "kind": "hazard",
+    "response": "dodge",
+    "width": 2,
+    "assetKey": "obstacle.food-cart",
+    "warning": "Hot-dogs !"
+  },
+  {
+    "id": "coffee",
+    "label": "Café",
+    "kind": "pickup",
+    "response": "collect",
+    "width": 1,
+    "assetKey": "pickup.coffee",
+    "damage": 0,
+    "effect": { "heal": 1, "score": 50 }
+  },
+  {
+    "id": "free-wifi",
+    "label": "Wi-Fi gratuit",
+    "kind": "pickup",
+    "response": "collect",
+    "width": 1,
+    "assetKey": "pickup.free-wifi",
+    "damage": 0,
+    "effect": { "stress": -5, "score": 30 }
+  }
+]

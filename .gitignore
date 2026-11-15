@@ -1,0 +1,47 @@
+# Dépendances
+node_modules/
+
+# Builds
+dist/
+dist-ssr/
+coverage/
+*.tsbuildinfo
+
+# Capacitor : on versionne android/ et ios/, mais pas leurs builds
+android/app/build/
+android/build/
+android/.gradle/
+android/local.properties
+android/app/release/
+ios/App/build/
+ios/App/Pods/
+ios/DerivedData/
+*.keystore
+*.jks
+*.p12
+*.mobileprovision
+
+# Environnement et secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Éditeurs (on garde la config VS Code partagée)
+.idea/
+*.swp
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json

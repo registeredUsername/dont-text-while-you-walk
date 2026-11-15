@@ -1,0 +1,29 @@
+name: Idée de notification
+description: Proposer un nouveau type de notif ou de nouveaux textes
+labels: [contenu, téléphone]
+body:
+  - type: input
+    id: sender
+    attributes:
+      label: Expéditeur
+      placeholder: Maman, Le chef, Groupe Famille, Banque...
+    validations:
+      required: true
+  - type: textarea
+    id: texts
+    attributes:
+      label: Texte(s) de la notif
+      description: Plusieurs variantes bienvenues, une par ligne.
+    validations:
+      required: true
+  - type: dropdown
+    id: gesture
+    attributes:
+      label: Geste attendu
+      options: [swipe droite (oui), swipe gauche (non), tap, appui long, autre / nouveau geste]
+    validations:
+      required: true
+  - type: textarea
+    id: rule
+    attributes:
+      label: Comment le joueur sait quelle est la bonne réponse

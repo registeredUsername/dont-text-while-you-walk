@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug dans Chrome (lancer npm run dev avant)",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:5173/?debug=1",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}

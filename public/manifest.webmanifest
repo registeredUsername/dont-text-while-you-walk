@@ -1,0 +1,10 @@
+{
+  "name": "Don't Text While You Walk",
+  "short_name": "DTWYW",
+  "start_url": "./",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "background_color": "#1d1f24",
+  "theme_color": "#1d1f24",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

@@ -1,0 +1,37 @@
+name: Idée d'obstacle ou d'événement de rue
+description: Proposer un nouvel obstacle, un PNJ ou un bonus dans la rue
+labels: [contenu, rue]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Nom
+      placeholder: Touriste au selfie-stick
+    validations:
+      required: true
+  - type: dropdown
+    id: response
+    attributes:
+      label: Réponse attendue du joueur
+      options: [changer de couloir, se baisser, sauter, s'arrêter, ramasser (bonus), autre]
+    validations:
+      required: true
+  - type: dropdown
+    id: lanes
+    attributes:
+      label: Couloirs occupés
+      options: ['1', '2', '3 (toute la largeur)']
+  - type: textarea
+    id: warning
+    attributes:
+      label: Signal d'alerte
+      description: Comment le joueur le voit ou l'entend venir quand il a le téléphone levé ?
+  - type: input
+    id: city
+    attributes:
+      label: Ville(s)
+      placeholder: Toutes, Paris, Tokyo...
+  - type: textarea
+    id: why
+    attributes:
+      label: Pourquoi c'est drôle ou intéressant

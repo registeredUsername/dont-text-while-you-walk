@@ -1,0 +1,137 @@
+[
+  {
+    "id": "mom-dinner",
+    "category": "family",
+    "sender": "Maman",
+    "texts": [
+      "Tu viens dîner dimanche ?",
+      "Tu as bien mangé ?",
+      "Tu as pensé à rappeler ta grand-mère ?"
+    ],
+    "expected": "swipeRight",
+    "hint": "→ oui",
+    "ttl": 8,
+    "points": 10,
+    "difficulty": 1,
+    "stressOnExpire": 2
+  },
+  {
+    "id": "spam-prize",
+    "category": "spam",
+    "sender": "Promo Flash",
+    "texts": [
+      "Félicitations ! Vous avez gagné un téléphone !",
+      "Votre colis est bloqué, payez 1,99 CHF",
+      "Crypto x100 garanti !!!"
+    ],
+    "expected": "swipeLeft",
+    "hint": "← supprimer",
+    "ttl": 8,
+    "points": 10,
+    "difficulty": 1
+  },
+  {
+    "id": "family-group",
+    "category": "social",
+    "sender": "Groupe Famille (47)",
+    "texts": [
+      "Tonton a partagé une vidéo de chats",
+      "Mamie : « COMMENT ON ENVOIE UNE PHOTO »",
+      "10 astuces incroyables avec du bicarbonate"
+    ],
+    "expected": "swipeLeft",
+    "hint": "← sourdine",
+    "ttl": 9,
+    "points": 10,
+    "difficulty": 1
+  },
+  {
+    "id": "boss-call",
+    "category": "work",
+    "sender": "Le chef",
+    "texts": ["On peut s'appeler 5 min ?", "Tu as vu mon mail ?", "Petit point rapide à 18h ?"],
+    "expected": "tap",
+    "hint": "tap : OK",
+    "ttl": 6,
+    "points": 20,
+    "difficulty": 2,
+    "stressOnExpire": 2
+  },
+  {
+    "id": "dating-yes",
+    "category": "dating",
+    "sender": "Match",
+    "texts": [
+      "Léa, 29 ans : rando, chats et fondue",
+      "Sam, 31 ans : cuisine, jeux de société, aime les grand-mères"
+    ],
+    "expected": "swipeRight",
+    "hint": "→ like",
+    "ttl": 7,
+    "points": 15,
+    "difficulty": 2
+  },
+  {
+    "id": "dating-no",
+    "category": "dating",
+    "sender": "Match",
+    "texts": [
+      "Kevin, 34 ans : « entrepreneur crypto, pas de drama »",
+      "Bryan, 27 ans : photo dans une voiture de sport louée",
+      "Jess, 30 ans : « réponds pas si t'es pas sérieux »"
+    ],
+    "expected": "swipeLeft",
+    "hint": "← nope",
+    "ttl": 7,
+    "points": 15,
+    "difficulty": 2
+  },
+  {
+    "id": "os-update",
+    "category": "system",
+    "sender": "Mise à jour",
+    "texts": [
+      "Mise à jour disponible. Installer maintenant ?",
+      "Accepter les nouvelles conditions (482 pages)"
+    ],
+    "expected": "swipeLeft",
+    "hint": "← plus tard",
+    "ttl": 6,
+    "points": 15,
+    "difficulty": 2
+  },
+  {
+    "id": "friend-photo",
+    "category": "social",
+    "sender": "Lou",
+    "texts": ["A publié une photo de son brunch", "T'a identifié·e sur une photo de 2009"],
+    "expected": "tap",
+    "hint": "tap : liker",
+    "ttl": 6,
+    "points": 15,
+    "difficulty": 2
+  },
+  {
+    "id": "bank-call",
+    "category": "system",
+    "sender": "Appel : numéro masqué",
+    "texts": ["Votre « conseiller bancaire » vous appelle", "Appel entrant : +44 7700 ..."],
+    "expected": "longPress",
+    "hint": "appui long : refuser",
+    "ttl": 6,
+    "points": 25,
+    "difficulty": 3
+  },
+  {
+    "id": "delivery",
+    "category": "system",
+    "sender": "Livraison",
+    "texts": ["Votre livreur est devant chez vous. Vous êtes où ?"],
+    "expected": "swipeRight",
+    "hint": "→ « j'arrive ! »",
+    "ttl": 5,
+    "points": 25,
+    "difficulty": 3,
+    "stressOnExpire": 2
+  }
+]
