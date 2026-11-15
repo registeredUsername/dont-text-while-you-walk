@@ -64,6 +64,32 @@
     "warning": "Chantier !"
   },
   {
+    "id": "dog-leash",
+    "label": "Laisse de chien",
+    "kind": "hazard",
+    "response": "jump",
+    "width": 3,
+    "assetKey": "obstacle.dog-leash",
+    "warning": "Wouf ! Une laisse !"
+  },
+  {
+    "id": "low-barrier",
+    "label": "Barrière basse",
+    "kind": "hazard",
+    "response": "jump",
+    "width": 3,
+    "assetKey": "obstacle.low-barrier",
+    "warning": "Barrière de chantier !"
+  },
+  {
+    "id": "puddle",
+    "label": "Flaque",
+    "kind": "hazard",
+    "response": "jump",
+    "width": 2,
+    "assetKey": "obstacle.puddle"
+  },
+  {
     "id": "tourist-selfie",
     "label": "Touriste selfie",
     "kind": "hazard",
@@ -98,7 +124,10 @@
     "width": 1,
     "assetKey": "pickup.coffee",
     "damage": 0,
-    "effect": { "heal": 1, "score": 50 }
+    "effect": {
+      "heal": 1,
+      "score": 50
+    }
   },
   {
     "id": "free-wifi",
@@ -108,6 +137,9 @@
     "width": 1,
     "assetKey": "pickup.free-wifi",
     "damage": 0,
-    "effect": { "stress": -5, "score": 30 }
+    "effect": {
+      "stress": -5,
+      "score": 30
+    }
   }
 ]

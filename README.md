@@ -29,7 +29,7 @@ Toutes les options de test (simulateurs, debug sur téléphone, apps natives) : 
 | Swipe ↑    | lever le téléphone |                                 |
 | Swipe ↓    | se baisser         | baisser le téléphone            |
 | Swipe ← →  | changer de couloir | répondre à la notif (non / oui) |
-| Tap        |                    | répondre (OK, liker)            |
+| Tap        | sauter             | répondre (OK, liker)            |
 | Appui long |                    | répondre (refuser un appel)     |
 
 Au clavier : flèches (ou WASD), espace = tap, L = appui long.
@@ -50,7 +50,11 @@ Au clavier : flèches (ou WASD), espace = tap, L = appui long.
 ## Debug
 
 Paramètres d'URL, combinables : `?debug=1` (overlay), `?seed=42` (rejouer la même partie),
-`?god=1` (invincible), `?speed=0.5` (ralenti), `?city=new-york` (démarrage direct), `?mute=1`.
+`?god=1` (invincible), `?start=1` (difficulté maximale dès le départ), `?speed=0.5` (ralenti),
+`?city=new-york` (démarrage direct), `?mute=1`.
+
+Dans le menu, deux réglages de test : **Départ** (Normal, Avancé, Chaos) pour démarrer directement
+dans une situation chargée, et **Invincible**. En mode test, le record n'est pas enregistré.
 
 ## Organisation
 

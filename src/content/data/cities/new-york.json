@@ -15,61 +15,160 @@
     "speedMax": 24,
     "patternGapStart": 22,
     "patternGapMin": 10,
-    "notificationIntervalStart": 4.5,
-    "notificationIntervalMin": 2,
+    "notificationIntervalStart": 2.8,
+    "notificationIntervalMin": 1.2,
     "ttlScaleEnd": 0.5
   },
   "patterns": [
     {
       "id": "single-pedestrian",
       "weight": 3,
-      "spawns": [{ "obstacle": "pedestrian", "lane": "random" }]
+      "spawns": [
+        {
+          "obstacle": "pedestrian",
+          "lane": "random"
+        }
+      ]
     },
     {
       "id": "tourist",
       "weight": 2,
-      "spawns": [{ "obstacle": "tourist-selfie", "lane": "random" }]
+      "spawns": [
+        {
+          "obstacle": "tourist-selfie",
+          "lane": "random"
+        }
+      ]
     },
-    { "id": "steam", "weight": 1, "spawns": [{ "obstacle": "steam-vent", "lane": "random" }] },
+    {
+      "id": "steam",
+      "weight": 1,
+      "spawns": [
+        {
+          "obstacle": "steam-vent",
+          "lane": "random"
+        }
+      ]
+    },
     {
       "id": "food-cart",
       "minDifficulty": 0.1,
-      "spawns": [{ "obstacle": "food-cart", "lane": "random" }]
+      "spawns": [
+        {
+          "obstacle": "food-cart",
+          "lane": "random"
+        }
+      ]
     },
     {
       "id": "scaffolding",
       "minDifficulty": 0.1,
-      "spawns": [{ "obstacle": "scaffolding", "lane": 0 }]
+      "spawns": [
+        {
+          "obstacle": "scaffolding",
+          "lane": 0
+        }
+      ]
     },
     {
       "id": "coffee",
       "minDifficulty": 0.2,
       "weight": 0.5,
-      "spawns": [{ "obstacle": "coffee", "lane": "random" }]
+      "spawns": [
+        {
+          "obstacle": "coffee",
+          "lane": "random"
+        }
+      ]
     },
     {
       "id": "rush-hour",
       "minDifficulty": 0.3,
       "spawns": [
-        { "obstacle": "pedestrian", "lane": 0, "dz": 0 },
-        { "obstacle": "pedestrian", "lane": 1, "dz": 0 },
-        { "obstacle": "pedestrian", "lane": 2, "dz": 10 },
-        { "obstacle": "pedestrian", "lane": 1, "dz": 10 }
+        {
+          "obstacle": "pedestrian",
+          "lane": 0,
+          "dz": 0
+        },
+        {
+          "obstacle": "pedestrian",
+          "lane": 1,
+          "dz": 0
+        },
+        {
+          "obstacle": "pedestrian",
+          "lane": 2,
+          "dz": 10
+        },
+        {
+          "obstacle": "pedestrian",
+          "lane": 1,
+          "dz": 10
+        }
       ]
     },
     {
       "id": "glass-and-tourist",
       "minDifficulty": 0.5,
       "spawns": [
-        { "obstacle": "glass-pane", "lane": 0, "dz": 0 },
-        { "obstacle": "tourist-selfie", "lane": "random", "dz": 6 }
+        {
+          "obstacle": "glass-pane",
+          "lane": 0,
+          "dz": 0
+        },
+        {
+          "obstacle": "tourist-selfie",
+          "lane": "random",
+          "dz": 6
+        }
       ]
     },
     {
       "id": "wifi",
       "minDifficulty": 0.4,
       "weight": 0.4,
-      "spawns": [{ "obstacle": "free-wifi", "lane": "random" }]
+      "spawns": [
+        {
+          "obstacle": "free-wifi",
+          "lane": "random"
+        }
+      ]
+    },
+    {
+      "id": "barrier",
+      "minDifficulty": 0.2,
+      "spawns": [
+        {
+          "obstacle": "low-barrier",
+          "lane": 0
+        }
+      ]
+    },
+    {
+      "id": "leash-and-cart",
+      "minDifficulty": 0.4,
+      "spawns": [
+        {
+          "obstacle": "dog-leash",
+          "lane": 0,
+          "dz": 0
+        },
+        {
+          "obstacle": "food-cart",
+          "lane": "random",
+          "dz": 12
+        }
+      ]
+    },
+    {
+      "id": "puddle",
+      "minDifficulty": 0.2,
+      "spawns": [
+        {
+          "obstacle": "puddle",
+          "lane": "random"
+        }
+      ]
     }
   ],
   "notifications": [

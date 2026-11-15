@@ -63,16 +63,16 @@ Dans `obstacles.json` :
 }
 ```
 
-| Champ      | Valeurs                                                              | Rôle                                                                               |
-| ---------- | -------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| `kind`     | `hazard` ou `pickup`                                                 | à éviter ou à ramasser                                                             |
-| `response` | `dodge` (changer de couloir), `duck` (se baisser), `collect` (bonus) |                                                                                    |
-| `width`    | 1 ou 2 pour `dodge`, 3 pour `duck`                                   | couloirs occupés                                                                   |
-| `speed`    | u/s, 0 = immobile                                                    | vitesse propre vers le joueur                                                      |
-| `assetKey` | clé                                                                  | doit exister dans `src/render/assetManifest.ts` (couleur et taille du placeholder) |
-| `warning`  | texte (optionnel)                                                    | alerte affichée quand on a le téléphone levé                                       |
-| `damage`   | entier (défaut 1)                                                    | vies perdues                                                                       |
-| `effect`   | `{ "heal": 1, "stress": -5, "score": 50 }`                           | effet d'un bonus                                                                   |
+| Champ      | Valeurs                                                                                                             | Rôle                                                                               |
+| ---------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `kind`     | `hazard` ou `pickup`                                                                                                | à éviter ou à ramasser                                                             |
+| `response` | `dodge` (changer de couloir), `duck` (se baisser), `jump` (sauter, ou contourner si largeur < 3), `collect` (bonus) |                                                                                    |
+| `width`    | 1 ou 2 pour `dodge`, 3 pour `duck`, 1 à 3 pour `jump`                                                               | couloirs occupés                                                                   |
+| `speed`    | u/s, 0 = immobile                                                                                                   | vitesse propre vers le joueur                                                      |
+| `assetKey` | clé                                                                                                                 | doit exister dans `src/render/assetManifest.ts` (couleur et taille du placeholder) |
+| `warning`  | texte (optionnel)                                                                                                   | alerte affichée quand on a le téléphone levé                                       |
+| `damage`   | entier (défaut 1)                                                                                                   | vies perdues                                                                       |
+| `effect`   | `{ "heal": 1, "stress": -5, "score": 50 }`                                                                          | effet d'un bonus                                                                   |
 
 Ajouter l'entrée correspondante dans `src/render/assetManifest.ts` (une ligne : couleur, largeur,
 hauteur), puis utiliser l'obstacle dans un pattern.
@@ -97,7 +97,10 @@ Dans une ville, `patterns` :
 - `lane` : 0 (gauche), 1 (milieu), 2 (droite) ou `"random"`.
 - `dz` : décalage en profondeur dans le pattern (12 u ≈ 1 s au début).
 - `minDifficulty` : 0 = dès le début, 1 = fin de courbe. `weight` : fréquence relative.
-- Les tests refusent un pattern qui bouche les 3 couloirs en même temps.
+- Les tests refusent un pattern qui bouche les 3 couloirs en même temps, ou qui demande de se
+  baisser et de sauter au même moment.
+- Hauteurs dans `assetManifest.ts` (en mètres, 1 couloir ≈ 1 m, yeux à 1,6) : un obstacle
+  « duck » doit être à hauteur de tête (`elevation` ≈ 1,4), un « jump » au ras du sol.
 
 ## Une ville
 

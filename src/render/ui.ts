@@ -35,3 +35,25 @@ export function makeButton(
   });
   return button;
 }
+
+/** Bouton dont le texte change à chaque clic (réglages du menu). */
+export function makeToggle(
+  scene: Phaser.Scene,
+  x: number,
+  y: number,
+  label: () => string,
+  onClick: () => void,
+): Phaser.GameObjects.Container {
+  const button = makeButton(
+    scene,
+    x,
+    y,
+    label(),
+    () => {
+      onClick();
+      (button.list[1] as Phaser.GameObjects.Text).setText(label());
+    },
+    { width: 520, height: 64, color: 0x3a3a3c, fontSize: 26 },
+  );
+  return button;
+}

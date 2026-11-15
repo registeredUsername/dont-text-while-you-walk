@@ -15,68 +15,189 @@
     "speedMax": 20,
     "patternGapStart": 30,
     "patternGapMin": 14,
-    "notificationIntervalStart": 6,
-    "notificationIntervalMin": 2.5,
+    "notificationIntervalStart": 3.5,
+    "notificationIntervalMin": 1.6,
     "ttlScaleEnd": 0.6
   },
   "patterns": [
     {
       "id": "single-pedestrian",
       "weight": 3,
-      "spawns": [{ "obstacle": "pedestrian", "lane": "random" }]
+      "spawns": [
+        {
+          "obstacle": "pedestrian",
+          "lane": "random"
+        }
+      ]
     },
-    { "id": "lamppost", "weight": 2, "spawns": [{ "obstacle": "lamppost", "lane": "random" }] },
-    { "id": "granny", "weight": 1, "spawns": [{ "obstacle": "granny", "lane": "random" }] },
-    { "id": "glass", "minDifficulty": 0.1, "spawns": [{ "obstacle": "glass-pane", "lane": 0 }] },
+    {
+      "id": "lamppost",
+      "weight": 2,
+      "spawns": [
+        {
+          "obstacle": "lamppost",
+          "lane": "random"
+        }
+      ]
+    },
+    {
+      "id": "granny",
+      "weight": 1,
+      "spawns": [
+        {
+          "obstacle": "granny",
+          "lane": "random"
+        }
+      ]
+    },
+    {
+      "id": "glass",
+      "minDifficulty": 0.1,
+      "spawns": [
+        {
+          "obstacle": "glass-pane",
+          "lane": 0
+        }
+      ]
+    },
     {
       "id": "coffee",
       "minDifficulty": 0.2,
       "weight": 0.5,
-      "spawns": [{ "obstacle": "coffee", "lane": "random" }]
+      "spawns": [
+        {
+          "obstacle": "coffee",
+          "lane": "random"
+        }
+      ]
     },
     {
       "id": "two-pedestrians",
       "minDifficulty": 0.2,
       "spawns": [
-        { "obstacle": "pedestrian", "lane": 0 },
-        { "obstacle": "pedestrian", "lane": 2 }
+        {
+          "obstacle": "pedestrian",
+          "lane": 0
+        },
+        {
+          "obstacle": "pedestrian",
+          "lane": 2
+        }
       ]
     },
     {
       "id": "slalom",
       "minDifficulty": 0.3,
       "spawns": [
-        { "obstacle": "lamppost", "lane": 0, "dz": 0 },
-        { "obstacle": "trash-bin", "lane": 2, "dz": 12 },
-        { "obstacle": "lamppost", "lane": 0, "dz": 24 }
+        {
+          "obstacle": "lamppost",
+          "lane": 0,
+          "dz": 0
+        },
+        {
+          "obstacle": "trash-bin",
+          "lane": 2,
+          "dz": 12
+        },
+        {
+          "obstacle": "lamppost",
+          "lane": 0,
+          "dz": 24
+        }
       ]
     },
     {
       "id": "stroller",
       "minDifficulty": 0.3,
-      "spawns": [{ "obstacle": "double-stroller", "lane": "random" }]
+      "spawns": [
+        {
+          "obstacle": "double-stroller",
+          "lane": "random"
+        }
+      ]
     },
     {
       "id": "wifi",
       "minDifficulty": 0.4,
       "weight": 0.4,
-      "spawns": [{ "obstacle": "free-wifi", "lane": "random" }]
+      "spawns": [
+        {
+          "obstacle": "free-wifi",
+          "lane": "random"
+        }
+      ]
     },
     {
       "id": "scaffolding-then-granny",
       "minDifficulty": 0.5,
       "spawns": [
-        { "obstacle": "scaffolding", "lane": 0, "dz": 0 },
-        { "obstacle": "granny", "lane": "random", "dz": 14 }
+        {
+          "obstacle": "scaffolding",
+          "lane": 0,
+          "dz": 0
+        },
+        {
+          "obstacle": "granny",
+          "lane": "random",
+          "dz": 14
+        }
       ]
     },
     {
       "id": "crowd",
       "minDifficulty": 0.6,
       "spawns": [
-        { "obstacle": "pedestrian", "lane": 0, "dz": 0 },
-        { "obstacle": "granny", "lane": 1, "dz": 8 },
-        { "obstacle": "pedestrian", "lane": 2, "dz": 16 }
+        {
+          "obstacle": "pedestrian",
+          "lane": 0,
+          "dz": 0
+        },
+        {
+          "obstacle": "granny",
+          "lane": 1,
+          "dz": 8
+        },
+        {
+          "obstacle": "pedestrian",
+          "lane": 2,
+          "dz": 16
+        }
+      ]
+    },
+    {
+      "id": "leash",
+      "minDifficulty": 0.15,
+      "spawns": [
+        {
+          "obstacle": "dog-leash",
+          "lane": 0
+        }
+      ]
+    },
+    {
+      "id": "puddle",
+      "minDifficulty": 0.25,
+      "spawns": [
+        {
+          "obstacle": "puddle",
+          "lane": "random"
+        }
+      ]
+    },
+    {
+      "id": "glass-then-leash",
+      "minDifficulty": 0.7,
+      "spawns": [
+        {
+          "obstacle": "glass-pane",
+          "lane": 0,
+          "dz": 0
+        },
+        {
+          "obstacle": "dog-leash",
+          "lane": 0,
+          "dz": 16
+        }
       ]
     }
   ],

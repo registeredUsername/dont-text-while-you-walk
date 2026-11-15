@@ -54,6 +54,8 @@ export interface GameState {
   previousLane: number;
   laneChangedAt: number;
   duckRemaining: number;
+  /** Temps restant en l'air (s). 0 = au sol. */
+  jumpRemaining: number;
 
   phone: {
     position: PhonePosition;
@@ -82,6 +84,7 @@ export type GameEvent =
   | { type: 'laneChanged'; lane: number; from: number }
   | { type: 'laneBlocked'; direction: -1 | 1 }
   | { type: 'ducked' }
+  | { type: 'jumped' }
   | { type: 'notificationArrived'; notification: NotificationInstance }
   | {
       type: 'notificationAnswered';
@@ -102,4 +105,9 @@ export type GameEvent =
 export interface SimulationOptions {
   /** Invincible (debug). */
   god?: boolean;
+  /**
+   * Difficulté de départ, de 0 (début normal) à 1 (difficulté maximale dès la première
+   * seconde). Pour tester les situations chargées sans attendre.
+   */
+  startDifficulty?: number;
 }

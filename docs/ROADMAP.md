@@ -19,7 +19,9 @@ Premier objectif : savoir si le dilemme écran/rue est amusant, avec des carrés
 - [ ] Indicateur de couloir et silhouette des mains tenant le téléphone
 - [ ] Écran de pause (et pause auto quand l'app passe en arrière-plan)
 - [ ] Notification « code 2FA » (séquence de taps) et « photo à liker » (double tap)
-- [ ] Obstacles : vélo/trottinette rapide, chien en laisse (saut ?), feu rouge (arrêt ?)
+- [x] Sauter (tap téléphone baissé) : laisse de chien, barrière basse, flaque
+- [x] Mode test : niveau de départ (Normal, Avancé, Chaos) et invincible dans le menu
+- [ ] Obstacles : vélo/trottinette rapide, feu rouge (arrêt ?)
 - [ ] Réglages : son, vibrations, mode gaucher
 - [ ] Partager le score de fin de partie
 - [ ] Analytics de playtest minimalistes (durée de partie, cause de mort), sans données personnelles

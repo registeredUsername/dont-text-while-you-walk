@@ -67,9 +67,13 @@ Ensuite :
 
 ## 6. Paramètres de debug
 
+Le menu propose aussi deux réglages mémorisés sur l'appareil : **Départ** (Normal = 0, Avancé = 0,6,
+Chaos = 1) et **Invincible**. Pratique sur téléphone, où on ne tape pas d'URL.
+
 | Paramètre        | Effet                                                                       |
 | ---------------- | --------------------------------------------------------------------------- |
 | `?debug=1`       | overlay : FPS, graine, état du téléphone, file de notifs, prochain obstacle |
+| `?start=0.6`     | difficulté de départ de 0 à 1 (1 = maximum dès la première seconde)         |
 | `?seed=1234`     | rejoue exactement la même partie (la graine est affichée en fin de partie)  |
 | `?god=1`         | invincible                                                                  |
 | `?speed=0.5`     | ralenti (jusqu'à 4 pour accélérer)                                          |

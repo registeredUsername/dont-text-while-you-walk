@@ -24,7 +24,7 @@ export class DebugOverlay {
       [
         `fps ${this.scene.game.loop.actualFps.toFixed(0)}  seed ${s.seed}`,
         `t ${s.time.toFixed(1)}s  diff ${s.difficulty.toFixed(2)}  v ${s.speed.toFixed(1)}`,
-        `lane ${s.lane}  phone ${s.phone.position}  duck ${s.duckRemaining > 0 ? 'oui' : 'non'}`,
+        `lane ${s.lane}  phone ${s.phone.position}  duck ${s.duckRemaining > 0 ? 'oui' : 'non'}  saut ${s.jumpRemaining > 0 ? 'oui' : 'non'}`,
         `notifs ${s.notifications.length}  stress ${s.stress.toFixed(1)}  combo ${s.combo}`,
         `obstacles ${s.obstacles.length}  prochain ${next ? `${next.def.id}@${(next.z - s.distance).toFixed(0)}u L${next.lane}` : '-'}`,
       ].join('\n'),

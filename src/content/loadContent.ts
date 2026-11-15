@@ -96,6 +96,15 @@ export function checkPatternSolvable(
       break;
     }
   }
+
+  // On ne peut pas se baisser et sauter en même temps.
+  const ducks = spawns.filter((s) => s.def.response === 'duck');
+  const jumps = spawns.filter((s) => s.def.response === 'jump' && s.def.width >= lanes);
+  if (ducks.some((d) => jumps.some((j) => Math.abs(d.spawn.dz - j.spawn.dz) < SIMULTANEOUS_DZ))) {
+    problems.push(
+      `pattern « ${pattern.id} » : un obstacle « duck » et un « jump » arrivent en même temps`,
+    );
+  }
   return problems;
 }
 

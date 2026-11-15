@@ -32,6 +32,8 @@ export class GameScene extends Phaser.Scene {
   private recognizer!: GestureRecognizer;
   private params!: DebugParams;
   private accumulator = 0;
+  private startDifficulty = 0;
+  private god = false;
   private ending = false;
 
   constructor() {
@@ -42,7 +44,12 @@ export class GameScene extends Phaser.Scene {
     const content = this.registry.get(REGISTRY.content) as GameContent;
     this.params = this.registry.get(REGISTRY.debug) as DebugParams;
     const seed = data.seed ?? this.params.seed ?? randomSeed(Math.random);
-    this.sim = new Simulation(content, data.cityId, seed, GAME_CONFIG, { god: this.params.god });
+    this.startDifficulty = this.params.start ?? data.startDifficulty ?? 0;
+    this.god = this.params.god || (data.god ?? false);
+    this.sim = new Simulation(content, data.cityId, seed, GAME_CONFIG, {
+      god: this.god,
+      startDifficulty: this.startDifficulty,
+    });
     this.accumulator = 0;
     this.ending = false;
 
@@ -67,7 +74,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     this.street.update(this.sim.state, delta);
-    this.phone.update(this.sim.state);
+    this.phone.update(this.sim.state, delta);
     this.hud.update(this.sim.state, this.sim.multiplier);
     this.debug?.update(this.sim);
 
@@ -179,6 +186,11 @@ export class GameScene extends Phaser.Scene {
           this.hud.popup('+1 ♥', 120, 140, '#ff5a5f');
           break;
         case 'ducked':
+          playSfx('duck');
+          break;
+        case 'jumped':
+          playSfx('jump');
+          break;
         case 'gameOver':
           break;
       }
@@ -190,6 +202,8 @@ export class GameScene extends Phaser.Scene {
     const s = this.sim.state;
     const data: GameOverData = {
       cityId: s.cityId,
+      startDifficulty: this.startDifficulty,
+      god: this.god,
       seed: s.seed,
       score: Math.floor(s.score),
       distance: Math.floor(s.distance),

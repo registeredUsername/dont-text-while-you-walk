@@ -16,7 +16,7 @@ export const GAME_CONFIG = {
   /** Calme au démarrage : premier obstacle à cette distance (u). */
   firstObstacleAt: 60,
   /** Délai avant la première notification (s). */
-  firstNotificationAfter: 4,
+  firstNotificationAfter: 2.5,
 
   phone: {
     /** Durée pour lever ou baisser le téléphone (s). */
@@ -31,7 +31,9 @@ export const GAME_CONFIG = {
     lives: 3,
     maxLives: 3,
     invulnerableSeconds: 1.5,
-    duckSeconds: 0.7,
+    duckSeconds: 0.8,
+    /** Durée d'un saut (s). On est protégé des obstacles « jump » pendant tout le saut. */
+    jumpSeconds: 0.7,
   },
 
   stress: {
