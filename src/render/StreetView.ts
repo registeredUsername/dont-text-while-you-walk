@@ -21,6 +21,8 @@ const FALLBACK_ASSET: AssetEntry = { type: 'placeholder', color: 0xff00ff, width
 const JOINT_SPACING = 6;
 const FACADE_SPACING = 14;
 const MAX_WARNINGS = 3;
+/** Décalage (u) entre la position réelle d'un obstacle et l'endroit où il est dessiné. Réglable au ressenti. */
+const OBSTACLE_VISUAL_OFFSET = 4;
 
 const hex = (color: string): number => Number.parseInt(color.slice(1), 16);
 
@@ -215,10 +217,12 @@ export class StreetView {
       seen.add(obstacle.uid);
       const sprite = this.sprites.get(obstacle.uid) ?? this.createSprite(obstacle);
       const entry = ASSET_MANIFEST[obstacle.def.assetKey] ?? FALLBACK_ASSET;
-      const p = depthFactor(d);
+      // Décalage visuel : à la collision (d = 0), l'obstacle est en bas de l'écran.
+      const rd = d - OBSTACLE_VISUAL_OFFSET;
+      const p = depthFactor(rd);
       const laneCenter = obstacle.lane + obstacle.def.width / 2 - GAME_CONFIG.lanes / 2;
       sprite.container
-        .setPosition(projectX(proj, laneCenter, d), projectY(proj, d, entry.elevation ?? 0))
+        .setPosition(projectX(proj, laneCenter, rd), projectY(proj, rd, entry.elevation ?? 0))
         .setScale(p)
         .setDepth(1000 - d)
         // Apparition progressive à l'horizon, disparition rapide une fois dépassé.
